@@ -40,16 +40,12 @@ export default async function RootLayout({
     <html lang="ru" className={`${victorMono.variable} ${stolzl.variable}`}>
       <body >
         <Providers regions={regions}>
-          {/* <div className="app-layout">
-            <main className="app-main"> */}
           <Suspense>
             <NavigationLoader />
           </Suspense>
           {children}
           <QuestionModal />
           <OrderModal />
-          {/* </main>
-          </div> */}
         </Providers>
       </body>
     </html>

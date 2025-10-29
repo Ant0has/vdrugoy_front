@@ -16,8 +16,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {};
   }
 
-  const siteName = "vdrugoy";
-  const page = `https://vdrugoy.ru/${params.region}.html`;
+  const siteName = "vdrugoy gorod";
+  const page = `https://vdrugoygorod.ru/${params.region}.html`;
   const title =
     data?.seo_title ||
     `Такси %%${data?.seo_title}%% %%${page}%% межгород ЦЕНА за Трансфер! Заказать междугороднее такси %%${siteName}%%`;
