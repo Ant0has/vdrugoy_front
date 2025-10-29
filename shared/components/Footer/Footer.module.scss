@@ -1,0 +1,131 @@
+.footer {
+  width: 100%;
+  background: var(--blue);
+
+  .container {
+    max-width: calc(var(--header-footer-width) + 48px);
+    padding: 32px 24px 32px;
+    margin: 0 auto;
+
+    .top {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 48px;
+    }
+
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .description {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .descriptionTop {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .descriptionBottom {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+
+    .navigationBlock {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .navigation {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      gap: 14px;
+    }
+
+    .contacts {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      flex-shrink: 0;
+      gap: 16px;
+      white-space: nowrap;
+    }
+
+    .phoneDescription {
+      text-align: end;
+    }
+
+    .roundLink {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      background: transparent;
+    }
+
+    @media (max-width: 905px) {
+      & {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .top {
+        display: contents;
+      }
+
+      .description {
+        display: contents;
+        gap: 32px;
+
+        .descriptionTop {
+          display: contents;
+          p {
+            display: none;
+          }
+        }
+      }
+
+      .descriptionBottom {
+        order: 4;
+      }
+
+      .navigationBlock {
+        order: 3;
+      }
+
+      .navigation {
+        align-items: center;
+        text-align: center;
+      }
+
+      .description,
+      .descriptionTop,
+      .contacts,
+      .phoneDescription {
+        align-items: center;
+        text-align: center;
+      }
+
+      .bottom {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+    }
+  }
+}

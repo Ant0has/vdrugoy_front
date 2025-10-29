@@ -1,0 +1,140 @@
+.buttonLink {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+  height: 48px;
+  padding: 8px 16px;
+  background: var(--primary-red);
+  border-radius: 16px;
+  transition-duration: var(--transition-duration);
+  span {
+    color: var(--white) !important;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: var(--primary-red-hover);
+    }
+  }
+
+  &:active {
+    background: var(--primary-red-active);
+  }
+
+  @media (max-width: 750px) {
+    padding: 8px;
+    span {
+      font-size: 20px;
+    }
+  }
+}
+
+.button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+  height: 48px;
+  padding: 8px 16px;
+  background: var(--primary-red);
+  border-radius: 16px;
+  transition-duration: var(--transition-duration);
+  flex-shrink: 0;
+
+  &.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 1s linear infinite;
+    }
+
+    span {
+      opacity: 0;
+    }
+  }
+
+  .text {
+    transition-duration: var(--transition-duration);
+  }
+
+  &.primary {
+    background: var(--primary-red);
+    .text {
+      color: var(--white);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background: var(--primary-red-hover);
+      }
+    }
+
+    &:active {
+      background: var(--primary-red-active);
+    }
+  }
+
+  &.default {
+    background: transparent;
+    border: 1px solid var(--dark);
+    padding: 15px 31px;
+
+    .text {
+      color: var(--dark);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background: var(--dark);
+        .text {
+          color: var(--white);
+        }
+      }
+    }
+  }
+
+  &.secondary {
+    background: var(--dark-blue);
+
+    .text {
+      color: var(--white);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background: var(--dark-blue-hover);
+      }
+    }
+
+    &:active {
+      background: var(--dark-blue-active);
+    }
+  }
+
+  &.disable {
+    pointer-events: none !important;
+    background: var(--disabled);
+    .text {
+      color: var(--disabled-text);
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

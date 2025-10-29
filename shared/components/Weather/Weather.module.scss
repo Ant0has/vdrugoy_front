@@ -1,0 +1,13 @@
+.wrapper {
+  background: var(--blue);
+}
+
+.title {
+  margin-bottom: 32px;
+}
+
+@media (max-width: 480px) {
+  .title {
+    margin-bottom: 24px;
+  }
+}

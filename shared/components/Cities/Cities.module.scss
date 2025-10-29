@@ -1,0 +1,40 @@
+.wrapper {
+  background: var(--blue);
+}
+
+.slide {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 32px 0px;
+}
+
+.region {
+  cursor: pointer;
+  font-family: var(--font-stolzl);
+  padding: 16px 32px;
+  border-radius: 16px;
+  background: var(--white);
+  text-align: center;
+}
+
+.search {
+  margin-top: 60px;
+  max-width: 532px;
+}
+
+@media (max-width: 480px) {
+  .slide {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin-bottom: 24px;
+  }
+  .region {
+    width: 100%;
+  }
+
+  .search {
+    margin-top: 0px;
+  }
+}

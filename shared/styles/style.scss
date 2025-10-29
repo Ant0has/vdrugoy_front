@@ -1,0 +1,39 @@
+.row-flex-8 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.row-flex-24 {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.address-select {
+  height: 44px !important;
+  .ant-select-selector {
+    background: var(--light-blue) !important;
+    // padding: 8px 16px !important;
+    border: none !important;
+    height: 44px !important;
+  }
+}
+
+@media (max-width: 775px) {
+  .departure-select {
+    .ant-select-selector {
+      border-radius: 16px 16px 0px 0px !important;
+    }
+  }
+
+  .arrival-select {
+    .ant-select-selector {
+      border-radius: 0px 0px 16px 16px !important;
+    }
+  }
+}
+
+// .ymaps-2-1-79-controls__toolbar_right {
+//   display: none !important;
+// }

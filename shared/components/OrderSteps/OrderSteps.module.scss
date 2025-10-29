@@ -1,0 +1,20 @@
+.actions {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+@media (max-width: 480px) {
+  .actions {
+    * {
+      width: 100%;
+    }
+    text-align: center;
+    flex-direction: column-reverse;
+  }
+
+  .contacts span {
+    font-size: 12px;
+  }
+}

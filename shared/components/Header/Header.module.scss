@@ -1,0 +1,128 @@
+.header {
+  width: 100%;
+  background: var(--light-blue);
+
+  .container {
+    max-width: calc(var(--header-footer-width) + 48px);
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+
+    .logoSmall {
+      display: none;
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+    }
+
+    .phone {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-right: 60px;
+
+      .block {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+
+    .icon {
+      display: none;
+    }
+
+    .burgerMenu {
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      padding: 4px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      span {
+        height: 2px;
+        display: block;
+        width: 100%;
+        background: var(--text);
+        border-radius: 1px;
+      }
+    }
+
+    @media (max-width: 1120px) {
+      .phone {
+        display: none;
+      }
+
+      .icon {
+        display: block;
+        margin-right: 24px;
+      }
+    }
+
+    @media (max-width: 750px) {
+      & {
+        display: grid;
+        grid-template-columns: 32px auto 32px;
+        row-gap: 12px;
+        grid-template-areas:
+          "a b c"
+          "d d d";
+      }
+
+      .left,
+      .right {
+        display: contents;
+      }
+
+      .logo {
+        display: none;
+      }
+
+      .logoSmall {
+        display: block;
+        order: 2;
+        grid-area: b;
+        align-self: center;
+        text-align: center;
+      }
+
+      .icon {
+        order: 1;
+        grid-area: a;
+        text-align: center;
+      }
+
+      .social {
+        grid-area: d;
+        order: 4;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+      }
+    }
+  }
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  div {
+    cursor: pointer;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
