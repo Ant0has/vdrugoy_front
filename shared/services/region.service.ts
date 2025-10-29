@@ -1,7 +1,7 @@
 import { IRegion } from "../types/types"
 
 class RegionService {
-    private BASE_URL = 'https://n.city2city.ru/api'
+    private BASE_URL = 'https://vdrugoygorod.ru/api'
 
     async getAll(): Promise<IRegion[]> {
         try {
