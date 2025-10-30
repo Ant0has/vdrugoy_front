@@ -1,7 +1,6 @@
 'use-client'
 
 import { PointsContext } from "@/app/providers";
-import { yandexMapsService } from "@/shared/services/yandex-maps.service";
 import { WeatherType } from "@/shared/types/enums";
 import clsx from "clsx";
 import { FC, useContext, useEffect, useState } from "react";
@@ -19,29 +18,43 @@ const Weather: FC = () => {
   const [departureWeather, setDepartureWeather] = useState<any>()
   const [arrivalWeather, setArrivalWeather] = useState<any>()
 
-  const getWeather = async ({ lat, lon }: { lat: number; lon: number }) => {
-    const res = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
-    );
-    const data = await res.json();
-    return data.current_weather;
+  const getWeather = async () => {
+    // const res = await fetch(
+    //   `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
+    // );
+    // const data = await res.json();
+    // return data.current_weather;
+
+    const accessKey = process.env.NEXT_PUBLIC_YANDEX_WEATHER_API_KEY;
+
+    const headers = {
+      'X-Yandex-Weather-Key': accessKey || ''
+    };
+
+    const response = await fetch('https://api.weather.yandex.ru/v2/forecast?lat=52.37125&lon=4.89388', { headers });
+    const data = await response.json();
+    console.log(data,'--data');
+    setDepartureWeather(data.fact);
+    setArrivalWeather(data.fact);
+    // return data.fact;
   };
 
   useEffect(() => {
-    yandexMapsService.getCoordinates(departurePoint).then((response) => {
-      if (response)
-        getWeather(response).then((r) => setDepartureWeather(r))
-    })
+    // yandexMapsService.getCoordinates(departurePoint).then((response) => {
+    //   if (response)
+    //     getWeather(response).then((r) => setDepartureWeather(r))
+    // })
+    getWeather()
 
-  }, [departurePoint])
+  }, [])
 
-  useEffect(() => {
-    yandexMapsService.getCoordinates(arrivalPoint).then((response) => {
-      if (response)
-        getWeather(response).then((r) => setArrivalWeather(r))
-    })
+  // useEffect(() => {
+  //   yandexMapsService.getCoordinates(arrivalPoint).then((response) => {
+  //     if (response)
+  //       getWeather(response).then((r) => setArrivalWeather(r))
+  //   })
 
-  }, [arrivalPoint])
+  // }, [arrivalPoint])
 
   const mapWeatherCodeToType = (code: number): WeatherType => {
     if ([0].includes(code)) return WeatherType.SUNNY;
@@ -55,10 +68,6 @@ const Weather: FC = () => {
 
     return WeatherType.CLOUDY;
   };
-
-  if (!departurePoint && !arrivalPoint) {
-    return <></>
-  }
 
   return (
     <div id="weather" className={s.wrapper}>
@@ -74,7 +83,7 @@ const Weather: FC = () => {
           centeredSlides={false} // важно!
           style={{ overflow: 'hidden', width: 'fit-content' }}
         >
-          {departurePoint && (
+          {departureWeather && (
             <SwiperSlide
               style={{
                 width: 'fit-content',
@@ -89,7 +98,7 @@ const Weather: FC = () => {
             </SwiperSlide>
           )}
 
-          {arrivalPoint && (
+          {arrivalWeather && (
             <SwiperSlide
               style={{
                 width: 'fit-content',

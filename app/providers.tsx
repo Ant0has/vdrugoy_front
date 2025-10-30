@@ -64,8 +64,7 @@ export function Providers({ children, regions }: ProvidersProps) {
 
 	return (
 		<YMaps query={{
-			// apikey: process.env.NEXT_PUBLIC_YANDEX_MAPS_API_KEY
-			apikey: '09312112-68cd-488d-afbd-7549b1e6e3df'
+			apikey: process.env.NEXT_PUBLIC_YANDEX_WEATHER_API_KEY
 		}}>
 			<ConfigProvider
 				wave={{ disabled: true }}

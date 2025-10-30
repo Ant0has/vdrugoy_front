@@ -1,5 +1,5 @@
 class YandexMapsService {
-  private readonly API_KEY = '09312112-68cd-488d-afbd-7549b1e6e3df';
+  private readonly API_KEY = process.env.NEXT_PUBLIC_YANDEX_WEATHER_API_KEY;
   private readonly SUGGEST_URL = 'https://suggest-maps.yandex.ru/suggest-geo';
   private readonly GEOCODER_URL = 'https://geocode-maps.yandex.ru/1.x/';
 

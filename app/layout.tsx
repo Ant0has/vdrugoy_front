@@ -1,20 +1,18 @@
-import QuestionModal from "@/shared/components/modals/QuestionModal/QuestionModal";
+import { victorMono } from '@/lib/fonts';
+import { stolzl } from '@/lib/localFonts';
 import NavigationLoader from '@/shared/components/NavigationLoader/NavigationLoader';
 import { SITE_DESCRIPTION, SITE_NAME } from '@/shared/constants/seo.constants';
 import { regionService } from '@/shared/services/region.service';
 import type { Metadata } from 'next';
-import { victorMono } from '@/lib/fonts'
-import { stolzl } from '@/lib/localFonts'
-import '../shared/styles/global.scss'
+import '../shared/styles/global.scss';
 
 import { Suspense } from "react";
 import { Providers } from './providers';
 
+import ClientSideModals from "@/shared/components/ClientSideModals/ClientSideModals";
 import '@/shared/styles/ant-design-styles.css';
 import '@/shared/styles/global.scss';
 import '@/shared/styles/style.scss';
-import OrderModal from "@/shared/components/modals/OrderModal/OrderModal";
-
 
 export const metadata: Metadata = {
   title: {
@@ -96,8 +94,7 @@ export default async function RootLayout({
             <NavigationLoader />
           </Suspense>
           {children}
-          <QuestionModal />
-          <OrderModal />
+          <ClientSideModals />
         </Providers>
       </body>
     </html>
