@@ -56,15 +56,24 @@ const Weather: FC = () => {
 
   // }, [arrivalPoint])
 
-  const mapWeatherCodeToType = (code: number): WeatherType => {
-    if ([0].includes(code)) return WeatherType.SUNNY;
-    if ([1, 2].includes(code)) return WeatherType.PARTLY_CLOUDY;
-    if ([3, 45, 48].includes(code)) return WeatherType.CLOUDY;
-    if ([51, 53, 55, 56, 57, 61].includes(code)) return WeatherType.LITTLE_RAIN;
-    if ([63, 65, 66, 67, 80, 81, 82].includes(code)) return WeatherType.RAINFALL;
-    if ([71, 73, 75, 77, 85, 86].includes(code)) return WeatherType.SNOW;
-    if ([95, 96, 99].includes(code)) return WeatherType.THUNDERSTORM;
-    // if ([windyCodeYouDefine].includes(code)) return WeatherType.WINDY;
+  const mapWeatherCodeToType = (condition: string): WeatherType => {
+    // if ([0].includes(code)) return WeatherType.SUNNY;
+    // if ([1, 2].includes(code)) return WeatherType.PARTLY_CLOUDY;
+    // if ([3, 45, 48].includes(code)) return WeatherType.CLOUDY;
+    // if ([51, 53, 55, 56, 57, 61].includes(code)) return WeatherType.LITTLE_RAIN;
+    // if ([63, 65, 66, 67, 80, 81, 82].includes(code)) return WeatherType.RAINFALL;
+    // if ([71, 73, 75, 77, 85, 86].includes(code)) return WeatherType.SNOW;
+    // if ([95, 96, 99].includes(code)) return WeatherType.THUNDERSTORM;
+    // // if ([windyCodeYouDefine].includes(code)) return WeatherType.WINDY;
+
+    if (condition === 'clear') return WeatherType.SUNNY;
+    if (condition === 'partly-cloudy') return WeatherType.PARTLY_CLOUDY;
+    if (condition === 'cloudy') return WeatherType.CLOUDY;
+    if (condition === 'rain') return WeatherType.LITTLE_RAIN;
+    if (condition === 'rain') return WeatherType.RAINFALL;
+    if (condition === 'snow') return WeatherType.SNOW;
+    if (condition === 'thunderstorm') return WeatherType.THUNDERSTORM;
+    if (condition === 'windy') return WeatherType.WINDY;
 
     return WeatherType.CLOUDY;
   };
@@ -90,10 +99,10 @@ const Weather: FC = () => {
               }}
             >
               <WeatherItem
-                city={departurePoint}
-                temperature={departureWeather?.temperature}
-                wind={departureWeather?.windspeed}
-                type={mapWeatherCodeToType(departureWeather?.weathercode)}
+                city={'Москва'}
+                temperature={departureWeather?.temp}
+                wind={departureWeather?.wind_speed}
+                type={mapWeatherCodeToType(departureWeather?.condition)}
               />
             </SwiperSlide>
           )}
@@ -104,10 +113,10 @@ const Weather: FC = () => {
                 width: 'fit-content',
               }} >
               <WeatherItem
-                city={arrivalPoint}
-                temperature={arrivalWeather?.temperature}
-                wind={arrivalWeather?.windspeed}
-                type={mapWeatherCodeToType(arrivalWeather?.weathercode)}
+                city={'Воронеж'}
+                temperature={arrivalWeather?.temp}
+                wind={arrivalWeather?.wind_speed}
+                type={mapWeatherCodeToType(arrivalWeather?.condition)}
               />
             </SwiperSlide>
           )}
