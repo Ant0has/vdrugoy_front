@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Home } from "../Home";
 import { routeService } from "@/shared/services/route.service";
 import { Metadata } from "next";
+import { SITE_NAME } from "@/shared/constants/seo.constants";
 
 interface Props {
   params: {
@@ -10,40 +11,63 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await routeService.getRouteByUrl(params.region);
+  const regionSlug = params.region.replace(/\.html$/, "");
+  const data = await routeService.getRouteByUrl(regionSlug);
 
+  // Если данные не найдены - возвращаем notFound()
   if (!data) {
-    return {};
+    notFound();
   }
 
-  const siteName = "vdrugoy gorod";
-  const page = `https://vdrugoygorod.ru/${params.region}.html`;
-  const title =
-    data?.seo_title ||
-    `Такси %%${data?.seo_title}%% %%${page}%% межгород ЦЕНА за Трансфер! Заказать междугороднее такси %%${siteName}%%`;
-  const description =
-    data?.seo_description ||
-    `⭐️⭐️⭐️⭐️⭐️ Заказать междугороднее такси vdrugoy по маршруту %%${data?.seo_title}%% %%${page}%%. Отличная цена, комфортные автомобили, проверенные водители. Заказ по телефонам: +7 (938) 156-87-578`;
+  const siteName = "vdrugoy";
+  
+  const canonicalUrl = `https://vdrugoygorod.ru/${regionSlug}.html`;
+  
+  const title = data?.seo_title || 
+      `Заказать такси ${data?.seo_title} - междугородние перевозки | ${SITE_NAME}`;
+  
+  const description = data?.seo_description || 
+    `Заказать междугороднее такси ${data?.seo_title}. Комфортные автомобили, опытные водители, фиксированные цены. Тел: +7 (938) 156-87-57. vdrugoy`;
+
+  const keywords = data?.meta?.keywords || 
+    `такси ${data?.seo_title}, междугороднее такси, заказ такси ${data?.seo_title}`;
 
   return {
     title,
     description,
+    keywords,
     robots: "index, follow",
-    keywords: data.metaKeywords,
+    
     alternates: {
-      canonical: page,
+      canonical: canonicalUrl,
     },
+    
     openGraph: {
       title,
       description,
-      url: page,
+      url: canonicalUrl,
+      siteName,
+      locale: "ru_RU",
       type: "website",
+      // Добавьте изображение для OG
+      images: [
+        {
+          url: "/og-image.jpg",
+          width: 1200,
+          height: 630,
+          alt: `Такси ${data?.seo_title} - vdrugoy`,
+        },
+      ],
     },
+    
     twitter: {
+      card: "summary_large_image",
       title,
       description,
-      card: "summary_large_image",
+      // Добавьте изображение для Twitter
+      images: ["/twitter-image.jpg"],
     },
+ 
   };
 }
 
