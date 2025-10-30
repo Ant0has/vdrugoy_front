@@ -1,6 +1,6 @@
 import { ThemeConfig } from "antd";
-import { victorMono } from '@/lib/fonts'
-import { stolzl } from '@/lib/localFonts'
+import { victorMono } from '@/shared/lib/fonts'
+import { stolzl } from '@/shared/lib/localFonts'
 
 export const tokens: ThemeConfig = {
   token: {

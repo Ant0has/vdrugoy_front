@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Home } from './Home'
+import Home from '../../screens/home/Home'
 
 
 export const metadata: Metadata = {

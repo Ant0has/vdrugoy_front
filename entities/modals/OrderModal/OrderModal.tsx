@@ -1,0 +1,46 @@
+'use client'
+
+import { ModalContext } from "@/app/providers";
+import { Form, Modal } from "antd";
+import { FC, useContext } from "react";
+import ModalTitle from "../ModalTitle/ModalTitle";
+import OrderForm from "@/entities/forms/OrderForm/OrderForm";
+
+interface IProps {
+  title?: unknown
+}
+
+const OrderModal: FC<IProps> = () => {
+  const { orderModalData, setOrderModalData } = useContext(ModalContext)
+
+  const [form] = Form.useForm();
+
+  return (
+    <Modal
+      centered
+      forceRender
+      destroyOnClose
+      open={orderModalData.status}
+      onCancel={() => {
+        setOrderModalData({ status: false })
+        form.resetFields()
+      }}
+      title={<ModalTitle title="Заказать такси" />}
+      footer={false}
+      width={588}
+    >
+      <OrderForm
+        form={form}
+        orderModalData={orderModalData}
+        handleClickLink={() => {
+          setOrderModalData({ status: false })
+        }}
+        handleClose={(isResetForm?: boolean) => {
+          setOrderModalData({ status: false })
+          isResetForm && form.resetFields()
+        }} />
+    </Modal>
+  )
+}
+
+export default OrderModal;

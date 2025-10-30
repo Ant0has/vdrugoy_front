@@ -1,5 +1,5 @@
-import { victorMono } from '@/lib/fonts';
-import { stolzl } from '@/lib/localFonts';
+import { victorMono } from '@/shared/lib/fonts';
+import { stolzl } from '@/shared/lib/localFonts';
 import NavigationLoader from '@/shared/components/NavigationLoader/NavigationLoader';
 import { SITE_DESCRIPTION, SITE_NAME } from '@/shared/constants/seo.constants';
 import { regionService } from '@/shared/services/region.service';
@@ -9,7 +9,7 @@ import '../shared/styles/global.scss';
 import { Suspense } from "react";
 import { Providers } from './providers';
 
-import ClientSideModals from "@/shared/components/ClientSideModals/ClientSideModals";
+import ClientSideModals from "@/entities/ClientSideModals/ClientSideModals";
 import '@/shared/styles/ant-design-styles.css';
 import '@/shared/styles/global.scss';
 import '@/shared/styles/style.scss';

@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
-import { Home } from "../Home";
-import { routeService } from "@/shared/services/route.service";
 import { Metadata } from "next";
+import { routeService } from "@/shared/services/route.service";
 import { SITE_NAME } from "@/shared/constants/seo.constants";
+import { Home } from "@/screens/home";
 
 interface Props {
   params: {

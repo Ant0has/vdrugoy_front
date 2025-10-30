@@ -19,7 +19,7 @@ const nextConfig = {
 
   compiler: {
     removeConsole: process.env.NEXT_PUBLIC_STAGE === 'production',
-  },
+  },  
 
   output: 'standalone',
   compress: true,

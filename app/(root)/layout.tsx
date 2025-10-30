@@ -1,5 +1,5 @@
-import Footer from "@/shared/components/Footer/Footer";
-import Header from "../../shared/components/Header/Header";
+import Footer from "@/widgets/Footer/Footer";
+import Header from "@/widgets/Header/Header";
 
 
 export default function AppLayout({
@@ -14,7 +14,6 @@ export default function AppLayout({
         {children}
       </main>
       <Footer />
-
     </div>
   </>;
 }

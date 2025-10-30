@@ -1,0 +1,62 @@
+
+.title {
+  margin-bottom: 48px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-image: url("/icons/orderStepCardL.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 416px;
+  height: 188px;
+  padding: 32px;
+  margin-top: 24px;
+}
+
+.number {
+  position: absolute;
+  font-family: var(--font-stolzl);
+  font-size: 40px;
+  color: var(--dark-blue);
+  z-index: 2;
+  top: -24px;
+}
+
+.button {
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+}
+
+.text {
+  font-size: 32px;
+  color: var(--white);
+  text-align: left;
+}
+
+.icon {
+  flex-shrink: 0;
+  font-size: 18px;
+}
+
+@media (max-width: 480px) {
+  .title {
+    margin-bottom: 32px;
+  }
+
+  .card {
+    padding: 0;
+    display: block;
+    background: none;
+    width: 238px;
+    height: 122px;
+    margin: 0;
+  }
+}
