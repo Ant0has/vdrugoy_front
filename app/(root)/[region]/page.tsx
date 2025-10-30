@@ -24,13 +24,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonicalUrl = `https://vdrugoygorod.ru/${regionSlug}.html`;
   
   const title = data?.seo_title || 
-      `Заказать такси ${data?.seo_title} - междугородние перевозки | ${SITE_NAME}`;
+      `Заказать такси vdrugoy - междугородние перевозки | ${SITE_NAME}`;
   
   const description = data?.seo_description || 
-    `Заказать междугороднее такси ${data?.seo_title}. Комфортные автомобили, опытные водители, фиксированные цены. Тел: +7 (938) 156-87-57. vdrugoy`;
+    `Заказать междугороднее такси vdrugoy. Комфортные автомобили, опытные водители, фиксированные цены. Тел: +7 (938) 156-87-57. vdrugoy`;
 
   const keywords = data?.meta?.keywords || 
-    `такси ${data?.seo_title}, междугороднее такси, заказ такси ${data?.seo_title}`;
+    `такси vdrugoy, междугороднее такси, заказ такси vdrugoy`;
 
   return {
     title,
@@ -55,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           url: "/og-image.jpg",
           width: 1200,
           height: 630,
-          alt: `Такси ${data?.seo_title} - vdrugoy`,
+          alt: `Такси vdrugoy `,
         },
       ],
     },
