@@ -63,6 +63,8 @@ const Footer = () => {
   ].filter(el => !el.isHidden)
 
   const currentYear = new Date().getFullYear();
+  const { markedPhone: markedPhoneFirst, phone: phoneFirst } = formatPhoneNumber(PHONE_NUMBER_FIRST)
+  const { markedPhone: markedRegionPhone, phone: regionPhone } = regionData?.phoneNumber ? formatPhoneNumber(regionData?.phoneNumber) : { markedPhone: '', phone: '' }
 
   return (
     <footer className={clsx(s.footer)}>
@@ -91,11 +93,11 @@ const Footer = () => {
           </div>
 
           <div className={s.contacts}>
-            {regionData?.phoneNumber && <a href={`tel:+${regionData?.phoneNumber}`} className='font-32-normal white-color font-stolzl'>
-              {formatPhoneNumber(regionData?.phoneNumber)}
+            {regionData?.phoneNumber && <a href={`tel:+${regionPhone}`} className='font-32-normal white-color font-stolzl'>
+              {markedRegionPhone}
             </a>}
-            <a href={`tel:+${PHONE_NUMBER_FIRST}`} className='font-32-normal white-color font-stolzl'>
-              {formatPhoneNumber(PHONE_NUMBER_FIRST)}
+            <a href={`tel:+${phoneFirst}`} className='font-32-normal white-color font-stolzl'>
+              {markedPhoneFirst}
             </a>
 
             <p className='font-18-normal white-color font-stolzl'>Москва,Тверская ул.,20, оф.100</p>

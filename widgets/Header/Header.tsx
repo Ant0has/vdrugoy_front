@@ -2,27 +2,23 @@
 
 import { PointsContext, RouteContext } from '@/app/providers';
 import LogoIcon from '@/public/icons/LogoIcon';
+import LogoSmallIcon from '@/public/icons/LogoSmallIcon';
 import PhoneIcon from '@/public/icons/PhoneIcon';
 import TelegramIcon from '@/public/icons/TelegramIcon';
 import WhatsUpIcon from '@/public/icons/WhatsUpIcon';
+import Button from '@/shared/components/ui/Button/Button';
 import { EMAIL_ADDRESS, PHONE_NUMBER_FIRST, TELEGRAM_LINK, WHATS_UP_LINK } from '@/shared/constants';
 import { formatPhoneNumber } from '@/shared/services/formate-phone-number';
 import { getSelectedRegion } from '@/shared/services/get-selected-region';
+import { goToBlock } from '@/shared/services/go-to-block';
 import { ButtonTypes } from '@/shared/types/enums';
 import { Popover } from 'antd';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { FC, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import s from './Header.module.scss';
-import LogoSmallIcon from '@/public/icons/LogoSmallIcon';
-import { goToBlock } from '@/shared/services/go-to-block';
-import Button from '@/shared/components/ui/Button/Button';
 
-interface IHeaderProps {
-
-}
-
-const Header: FC<IHeaderProps> = () => {
+const Header = () => {
   const { route } = useContext(RouteContext)
   const { departurePoint, arrivalPoint } = useContext(PointsContext)
   const [isOpenPhone, setIsOpenPhone] = useState<boolean>(false)
@@ -30,12 +26,12 @@ const Header: FC<IHeaderProps> = () => {
 
   const regionData = getSelectedRegion(route)
 
+  const { markedPhone: markedPhoneFirst, phone: phoneFirst } = formatPhoneNumber(PHONE_NUMBER_FIRST)
+  const { markedPhone: markedRegionPhone, phone: regionPhone } = regionData?.phoneNumber ? formatPhoneNumber(regionData?.phoneNumber) : { markedPhone: '', phone: '' }
+
+
+
   const navList = [
-    // {
-    //   id: 1,
-    //   label: 'Главная',
-    //   // route: 'contacts'
-    // },
     {
       id: 2,
       label: 'Заказать такси',
@@ -46,7 +42,6 @@ const Header: FC<IHeaderProps> = () => {
       label: 'Погода',
       isHidden: !departurePoint && !arrivalPoint,
       handleClick: () => goToBlock('weather')
-      // handleClick: () => setQuestionModalData({ status: true, blockFrom: Blocks.FOOTER })
     },
     {
       id: 4,
@@ -109,12 +104,12 @@ const Header: FC<IHeaderProps> = () => {
             {regionData?.address && <p>{regionData?.address}</p>}
 
             <div className={s.block}>
-              {regionData?.phoneNumber && <a href={`tel:+${regionData?.phoneNumber}`} className='text-color font-stolzl font-32-normal'>
-                {formatPhoneNumber(regionData?.phoneNumber)}
+              {regionData?.phoneNumber && <a href={`tel:+${regionPhone}`} className='text-color font-stolzl font-32-normal'>
+                {markedRegionPhone}
               </a>}
 
-              <a href={`tel:+${PHONE_NUMBER_FIRST}`} className='text-color font-stolzl font-32-semibold'>
-                {formatPhoneNumber(PHONE_NUMBER_FIRST)}
+              <a href={`tel:+${phoneFirst}`} className='text-color font-stolzl font-32-semibold'>
+                {markedPhoneFirst}
               </a>
 
               {regionData?.address && <p className='text-color font-stolzl font-14-normal'>{regionData?.address}</p>}
@@ -124,11 +119,11 @@ const Header: FC<IHeaderProps> = () => {
           <Popover
             content={
               <div className={s.navList}>
-                {regionData?.phoneNumber && <a href={`tel:+${regionData?.phoneNumber}`} className='font-16-normal font-stolzl text-color'>
-                  {formatPhoneNumber(regionData?.phoneNumber)}
+                {regionData?.phoneNumber && <a href={`tel:+${regionPhone}`} className='font-16-normal font-stolzl text-color'>
+                  {markedRegionPhone}
                 </a>}
-                <a href={`tel:+${PHONE_NUMBER_FIRST}`} className='font-16-normal font-stolzl text-color'>
-                  {formatPhoneNumber(PHONE_NUMBER_FIRST)}
+                <a href={`tel:+${phoneFirst}`} className='font-16-normal font-stolzl text-color'>
+                  {markedPhoneFirst}
                 </a>
                 <a href={`mailto:${EMAIL_ADDRESS}`} className='font-16-normal font-stolzl text-color'>{EMAIL_ADDRESS}</a>
               </div>
