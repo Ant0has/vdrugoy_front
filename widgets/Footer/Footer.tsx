@@ -13,11 +13,13 @@ import { useContext } from 'react';
 import Button from '../../shared/components/ui/Button/Button';
 import s from './Footer.module.scss';
 import { goToBlock } from '@/shared/services/go-to-block';
+import { useRouter } from 'next/navigation';
 
 const Footer = () => {
   const { route } = useContext(RouteContext)
   const { setQuestionModalData } = useContext(ModalContext)
   const { arrivalPoint, departurePoint } = useContext(PointsContext)
+  const router = useRouter()
 
   const regionData = getSelectedRegion(route)
 
@@ -59,6 +61,11 @@ const Footer = () => {
     {
       id: 7,
       label: 'Контакты',
+    },
+    {
+      id: 7,
+      label: 'Оферта',
+      handleClick: () => router.push('/oferta')
     },
   ].filter(el => !el.isHidden)
 

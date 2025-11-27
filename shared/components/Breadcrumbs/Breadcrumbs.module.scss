@@ -1,0 +1,26 @@
+.breadcrumbs {
+    display: flex;
+    gap: 24px;
+    margin: 0 0px 20px;
+
+    font-size: 18px;
+    font-weight: 400;
+    color:var(--dark);
+    line-height: 100%;
+
+    a {
+      color: var(--dark);
+      transition-duration: var(--transition-duration);
+      &:hover {
+        color: var(--orange);
+      }
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .breadcrumbs {
+      display: flex;
+      gap: 24px;
+      margin: 24px 0px;
+    }
+  }
