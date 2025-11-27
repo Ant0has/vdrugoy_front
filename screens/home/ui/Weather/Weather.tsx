@@ -78,6 +78,8 @@ const Weather: FC = () => {
     return WeatherType.CLOUDY;
   };
 
+  if (!departureWeather || !arrivalWeather) return null;
+
   return (
     <div id="weather" className={s.wrapper}>
       <div className="container container-48">
