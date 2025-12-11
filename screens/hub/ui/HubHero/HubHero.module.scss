@@ -1,0 +1,102 @@
+.hero {
+  min-height: 500px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 80px 0 60px;
+
+  @media (max-width: 768px) {
+    min-height: auto;
+    padding: 60px 0 40px;
+  }
+}
+
+.heroOverlay {
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.heroContent {
+  max-width: 700px;
+}
+
+.heroTitle {
+  font-size: 48px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+  line-height: 1.2;
+
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
+}
+
+.heroSubtitle {
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 16px;
+  font-weight: 500;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
+}
+
+.heroDescription {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 32px;
+  line-height: 1.6;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+}
+
+.heroActions {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 48px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin-bottom: 32px;
+  }
+}
+
+.stats {
+  display: flex;
+  gap: 48px;
+
+  @media (max-width: 768px) {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.statValue {
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+
+  @media (max-width: 768px) {
+    font-size: 28px;
+  }
+}
+
+.statLabel {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}

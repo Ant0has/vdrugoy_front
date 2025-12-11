@@ -149,7 +149,10 @@ const AddressSelect: FC<IProps> = ({ selectedPlan, isMilitary }) => {
 
   return (
     <div id="order" className={clsx(s.wrapper, { [s.military]: isMilitary })}>
-      <div className={clsx(s.title, 'font-stolzl')}>Укажите куда вам надо</div>
+      <div className={clsx(s.title, 'font-stolzl')}>Калькулятор стоимости поездки</div>
+      <div className={clsx(s.subtitle, 'font-14-normal')}>
+        Укажите точные адреса для предварительного расчёта стоимости. Окончательная цена будет подтверждена менеджером.
+      </div>
 
       <div className={s.selection}>
         <div className={s.part}>

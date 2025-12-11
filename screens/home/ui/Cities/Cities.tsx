@@ -1,105 +1,136 @@
 'use client';
 
-import { RegionsContext } from "@/app/providers";
 import { getPaginatedList } from "@/shared/services/get-paginated-list";
-import { IRoute } from "@/shared/types/route.interface";
-import { IRegion } from "@/shared/types/types";
+import { IHub, IDestination } from "@/shared/types/types";
 import { Input, Pagination } from "antd";
 import clsx from "clsx";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { ChangeEventHandler, FC, useContext, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import s from './Cities.module.scss';
-import { generateMockRoutes } from "./data";
 import { Empty } from 'antd';
 
 interface IProps {
-  routes?: IRoute[]
+  hubs?: IHub[]
 }
 
-const Cities: FC<IProps> = ({ routes = generateMockRoutes() }) => {
+// Формат цены
+const formatPrice = (price?: number) => {
+  if (!price) return null;
+  return new Intl.NumberFormat('ru-RU').format(price);
+};
 
-
+const Cities: FC<IProps> = ({ hubs = [] }) => {
   const [page, setPage] = useState<number>(0);
-  const regions = useContext(RegionsContext)
-  const router = useRouter()
+  const [searchValue, setSearchValue] = useState<string>('');
 
-  const defaultRoutes = routes ?? regions
-  const [sortedRoutes, setSortedRoutes] = useState<any>(defaultRoutes)
-  const [searchValue, setSearchValue] = useState<string>('')
+  // Собираем все направления из всех хабов с информацией о хабе
+  const allDestinations = useMemo(() => {
+    const destinations: Array<IDestination & { hub: IHub }> = [];
+    hubs.forEach(hub => {
+      if (hub.destinations) {
+        hub.destinations.forEach(dest => {
+          destinations.push({ ...dest, hub });
+        });
+      }
+    });
+    return destinations;
+  }, [hubs]);
 
-  const handleRegionClick = (region: IRegion | IRoute) => {
-    router.push(`/${region.url}`)
-  }
+  // Фильтруем по поисковому запросу
+  const filteredDestinations = useMemo(() => {
+    if (!searchValue.trim()) return allDestinations;
+
+    const query = searchValue.toLowerCase();
+    return allDestinations.filter(dest =>
+      dest.name.toLowerCase().includes(query) ||
+      dest.hub.name.toLowerCase().includes(query) ||
+      dest.fromCity?.toLowerCase().includes(query) ||
+      dest.toCity?.toLowerCase().includes(query)
+    );
+  }, [allDestinations, searchValue]);
 
   const handleChangeSearchValue = (value: string) => {
-    setSearchValue(value)
+    setSearchValue(value);
+    setPage(0); // Сброс на первую страницу при поиске
+  };
 
-    setSortedRoutes(defaultRoutes.filter((el: any) => {
-      const currentField: string = routes ? el?.title : el.meta_value
-      return currentField.toLowerCase().includes(value.toLocaleLowerCase())
-    }))
+  if (hubs.length === 0) {
+    return null;
   }
 
   return (
     <div id="cities" className={s.wrapper}>
-      <div className="container container-40 ">
-        <div className="title white-color">Другие города</div>
+      <div className="container container-40">
+        <div className="title white-color">Популярные направления</div>
+        <p className={clsx(s.subtitle, 'font-14-normal')}>
+          Выберите направление или воспользуйтесь поиском
+        </p>
 
         <div className={s.search}>
-          <Input value={searchValue} onChange={(e) => handleChangeSearchValue(e.target.value)} placeholder="Поиск" />
+          <Input
+            value={searchValue}
+            onChange={(e) => handleChangeSearchValue(e.target.value)}
+            placeholder="Поиск по городам и направлениям"
+          />
         </div>
 
-
         <div className={s.slide}>
-          {sortedRoutes.length === 0 ? <Empty /> : (
+          {filteredDestinations.length === 0 ? (
+            <Empty description="Направления не найдены" />
+          ) : (
             <>
-              {
-                routes ? getPaginatedList<IRoute>(sortedRoutes, page, 10).map((region) => (
-                  <Link
-                    href={region.url || ''}
-                    key={region.ID}
-                    className={clsx(s.region, 'font-16-normal')}
-                    onClick={() => handleRegionClick(region)}
-                    style={{ cursor: 'pointer' }}
-                  >
-                    {region?.title}
-                  </Link>
-                )) : getPaginatedList<IRegion>(sortedRoutes, page, 10).map((region) => (
-                  <Link
-                    href={region.url || ''}
-                    key={region.ID}
-                    className={clsx(s.region, 'font-16-normal')}
-                    onClick={() => handleRegionClick(region)}
-                    style={{ cursor: 'pointer' }}
-                  >
-                    {`Такси ${region?.meta_value}`}
-                  </Link>
-                ))
-              }
+              {getPaginatedList<IDestination & { hub: IHub }>(filteredDestinations, page, 12).map((dest) => (
+                <Link
+                  href={`/${dest.hub.slug}/${dest.slug}`}
+                  key={dest.id}
+                  className={clsx(s.region, 'font-16-normal')}
+                >
+                  <span className={s.destName}>{dest.name}</span>
+                  {dest.price && (
+                    <span className={s.destPrice}>от {formatPrice(dest.price)} ₽</span>
+                  )}
+                </Link>
+              ))}
             </>
           )}
-
-
         </div>
 
         <Pagination
           align="center"
-          pageSize={10}
+          pageSize={12}
           current={page + 1}
-          defaultPageSize={10}
+          defaultPageSize={12}
           defaultCurrent={1}
-          total={sortedRoutes.length}
-          onChange={(qqq) => setPage(qqq - 1)}
+          total={filteredDestinations.length}
+          onChange={(p) => setPage(p - 1)}
           hideOnSinglePage={true}
           showTitle={false}
           itemRender={(page, type, originalElement) => {
             if (type === 'jump-prev' || type === 'jump-next') {
-              return null; // не рендерим точки
+              return null;
             }
             return originalElement;
           }}
         />
+
+        {/* Секция с хабами */}
+        <div className={s.hubsSection}>
+          <div className={clsx(s.hubsTitle, 'font-16-normal')}>Направления по категориям:</div>
+          <div className={s.hubsList}>
+            {hubs.map(hub => (
+              <Link
+                href={`/${hub.slug}`}
+                key={hub.id}
+                className={clsx(s.hubLink, 'font-14-normal')}
+              >
+                {hub.name}
+                {hub._count?.destinations && (
+                  <span className={s.hubCount}>({hub._count.destinations})</span>
+                )}
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )

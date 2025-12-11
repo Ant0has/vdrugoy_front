@@ -5,7 +5,12 @@
 }
 .title {
   font-size: 40px;
-  margin-bottom: 48px;
+  margin-bottom: 12px;
+}
+.subtitle {
+  color: #666;
+  margin-bottom: 32px;
+  max-width: 600px;
 }
 .selection {
   display: grid;

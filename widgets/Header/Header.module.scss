@@ -113,11 +113,39 @@
 .navList {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
 
   div {
     cursor: pointer;
   }
+
+  a {
+    display: block;
+    padding: 4px 0;
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--blue);
+    }
+  }
+}
+
+.hubsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hubsTitle {
+  color: var(--gray);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.divider {
+  height: 1px;
+  background: var(--light-gray);
+  margin: 8px 0;
 }
 
 .content {

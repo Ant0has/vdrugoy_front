@@ -1,0 +1,166 @@
+.hero {
+  min-height: 450px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 100px 0 60px;
+
+  @media (max-width: 768px) {
+    min-height: auto;
+    padding: 80px 0 40px;
+  }
+}
+
+.heroOverlay {
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  font-size: 14px;
+
+  a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  span {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .current {
+    color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+.heroContent {
+  max-width: 800px;
+}
+
+.heroTitle {
+  font-size: 42px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+  line-height: 1.2;
+
+  @media (max-width: 768px) {
+    font-size: 28px;
+  }
+}
+
+.heroSubtitle {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 32px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+}
+
+.routeInfo {
+  margin-bottom: 32px;
+}
+
+.routePath {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+.cityFrom,
+.cityTo {
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.routeLine {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  max-width: 200px;
+
+  @media (max-width: 768px) {
+    transform: rotate(90deg);
+    max-width: 60px;
+  }
+}
+
+.routeDot {
+  width: 8px;
+  height: 8px;
+  background: #1890ff;
+  border-radius: 50%;
+}
+
+.routeDash {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, #1890ff, rgba(24, 144, 255, 0.3));
+}
+
+.routeStats {
+  display: flex;
+  gap: 40px;
+
+  @media (max-width: 768px) {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+}
+
+.routeStat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.routeStatValue {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
+}
+
+.routeStatLabel {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.heroActions {
+  display: flex;
+  gap: 16px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,57 @@
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.link {
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.2s;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.current {
+  color: #fff;
+}
+
+.separator {
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0 4px;
+}
+
+// Тёмная тема (для светлого фона)
+.breadcrumbs.dark {
+  .link {
+    color: var(--gray);
+
+    &:hover {
+      color: var(--black);
+    }
+  }
+
+  .current {
+    color: var(--black);
+  }
+
+  .separator {
+    color: var(--light-gray);
+  }
+}
+
+@media (max-width: 480px) {
+  .breadcrumbs {
+    font-size: 12px;
+  }
+}

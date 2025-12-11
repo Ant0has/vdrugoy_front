@@ -12,10 +12,11 @@ import { formatPhoneNumber } from '@/shared/services/formate-phone-number';
 import { getSelectedRegion } from '@/shared/services/get-selected-region';
 import { goToBlock } from '@/shared/services/go-to-block';
 import { ButtonTypes } from '@/shared/types/enums';
+import { IHub } from '@/shared/types/types';
 import { Popover } from 'antd';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import s from './Header.module.scss';
 
 const Header = () => {
@@ -23,6 +24,15 @@ const Header = () => {
   const { departurePoint, arrivalPoint } = useContext(PointsContext)
   const [isOpenPhone, setIsOpenPhone] = useState<boolean>(false)
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
+  const [isOpenDirections, setIsOpenDirections] = useState<boolean>(false)
+  const [hubs, setHubs] = useState<IHub[]>([])
+
+  useEffect(() => {
+    fetch('/api/hubs')
+      .then(res => res.json())
+      .then(data => setHubs(data))
+      .catch(err => console.error('Failed to fetch hubs:', err))
+  }, [])
 
   const regionData = getSelectedRegion(route)
 
@@ -45,7 +55,7 @@ const Header = () => {
     },
     {
       id: 4,
-      label: 'Другие маршруты',
+      label: 'Направления',
       handleClick: () => goToBlock('cities')
     },
     {
@@ -143,6 +153,23 @@ const Header = () => {
           <Popover
             content={
               <div className={s.navList}>
+                {/* Направления */}
+                {hubs.length > 0 && (
+                  <div className={s.hubsSection}>
+                    <div className={clsx(s.hubsTitle, 'font-14-normal')}>Направления:</div>
+                    {hubs.map(hub => (
+                      <Link
+                        key={hub.id}
+                        href={`/${hub.slug}`}
+                        className='font-16-normal font-stolzl text-color'
+                        onClick={() => setIsOpenMenu(false)}
+                      >
+                        {hub.name}
+                      </Link>
+                    ))}
+                    <div className={s.divider} />
+                  </div>
+                )}
                 {navList.map((item, id) => {
                   return (
                     <div key={id} onClick={() => {
