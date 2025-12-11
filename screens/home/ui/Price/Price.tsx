@@ -1,10 +1,7 @@
 'use-client'
 
-import CityImage from '@/public/images/city-image.jpg';
-import { getTitle } from "@/shared/services/getTitle";
 import { Prices } from "@/shared/types/enums";
 import { Tabs, TabsProps } from "antd";
-import Image from "next/image";
 import { FC, useState } from "react";
 import AddressSelect from "./AddressSelect/AddressSelect";
 import { planLabel } from "./data";
@@ -53,18 +50,13 @@ const Price: FC<IProps> = ({ title, isMilitary }) => {
   ]
   return (
     <div className='container'>
-
-      <h2 className="title margin-b-20">{getTitle(title)}</h2>
-
-
       <div className={s.content}>
         <div className={s.block}>
           <div className={s.imageContainer}>
-            <Image
-              src={CityImage}
-              alt={'city-image'}
-              fill
-            />
+            <div className={s.imagePlaceholder}>
+              <h2 className={s.imageTitle}>Выберите тариф</h2>
+              <p className={s.imageSubtitle}>Комфортные поездки по фиксированным ценам</p>
+            </div>
           </div>
         </div>
 
