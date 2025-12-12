@@ -16,6 +16,7 @@ import { IHub } from '@/shared/types/types';
 import { Popover } from 'antd';
 import clsx from 'clsx';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useContext, useState, useEffect } from 'react';
 import s from './Header.module.scss';
 
@@ -26,6 +27,7 @@ const Header = () => {
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
   const [isOpenDirections, setIsOpenDirections] = useState<boolean>(false)
   const [hubs, setHubs] = useState<IHub[]>([])
+  const router = useRouter()
 
   useEffect(() => {
     fetch('/api/hubs')
@@ -39,40 +41,28 @@ const Header = () => {
   const { markedPhone: markedPhoneFirst, phone: phoneFirst } = formatPhoneNumber(PHONE_NUMBER_FIRST)
   const { markedPhone: markedRegionPhone, phone: regionPhone } = regionData?.phoneNumber ? formatPhoneNumber(regionData?.phoneNumber) : { markedPhone: '', phone: '' }
 
-
-
   const navList = [
     {
-      id: 2,
-      label: 'Заказать такси',
-      handleClick: () => goToBlock('order')
-    },
-    {
-      id: 3,
+      id: 1,
       label: 'Погода',
       isHidden: !departurePoint && !arrivalPoint,
       handleClick: () => goToBlock('weather')
     },
     {
-      id: 4,
-      label: 'Направления',
-      handleClick: () => goToBlock('cities')
-    },
-    {
-      id: 5,
-      label: 'Отзывы',
-      route: 'oferta',
-      handleClick: () => goToBlock('reviews')
-    },
-    {
-      id: 6,
+      id: 2,
       label: 'Описание маршрута',
       isHidden: !route?.content,
       handleClick: () => goToBlock('routeDescription')
     },
     {
-      id: 7,
+      id: 3,
       label: 'Контакты',
+      handleClick: () => router.push('/kontakty')
+    },
+    {
+      id: 4,
+      label: 'Оферта',
+      handleClick: () => router.push('/oferta')
     },
   ].filter(el => !el.isHidden)
 
