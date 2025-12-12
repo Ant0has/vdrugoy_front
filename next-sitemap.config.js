@@ -1,21 +1,8 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+/** @type {import('next-sitemap').IConfig} */
+module.exports = {
   siteUrl: 'https://vdrugoygorod.ru',
-  generateRobotsTxt: true,
-  robotsTxtOptions: {
-    policies: [
-      {
-        userAgent: '*',
-        allow: '/',
-      },
-    ],
-  },
-  images: {
-    domains: ['vdrugoygorod.ru'],
-  },
-  experimental: {
-    optimizePackageImports: ['heavy-package'],
-  },
-};
-
-module.exports = nextConfig; 
+  generateRobotsTxt: false, // Используем app/robots.ts вместо этого
+  exclude: ['/api/*', '/_next/*'],
+  generateIndexSitemap: false,
+  // Sitemap генерируется через app/sitemap.ts
+} 

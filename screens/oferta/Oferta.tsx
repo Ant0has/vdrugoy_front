@@ -1,11 +1,16 @@
 import clsx from "clsx";
 import { FC } from "react";
-import Breadcrumbs from "@/shared/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "@/shared/components/ui/Breadcrumbs/Breadcrumbs";
 
 const Oferta: FC = () => {
+  const breadcrumbItems = [
+    { label: 'Главная', href: '/' },
+    { label: 'Договор-оферта' }
+  ]
+
   return (
     <div className={clsx("container")}>
-      <Breadcrumbs />
+      <Breadcrumbs items={breadcrumbItems} className="margin-t-40 margin-b-20" />
       <article className="default-tag">
         <h2>ПУБЛИЧНЫЙ ДОГОВОР-ОФЕРТА<br/>на оказание услуг междугородних пассажирских перевозок</h2>
 
