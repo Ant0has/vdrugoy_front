@@ -8,6 +8,7 @@ import OrderSteps from "../home/ui/OrderSteps/OrderSteps"
 import DestinationHero from "./ui/DestinationHero/DestinationHero"
 import DestinationFeatures from "./ui/DestinationFeatures/DestinationFeatures"
 import DestinationDescription from "./ui/DestinationDescription/DestinationDescription"
+import DestinationWeather from "./ui/DestinationWeather/DestinationWeather"
 import SeoText from "@/shared/components/ui/SeoText/SeoText"
 import s from './Destination.module.scss'
 
@@ -63,6 +64,11 @@ const Destination = ({ destination }: Props) => {
       </section>
 
       <DestinationFeatures destination={destination} />
+
+      {destination.weatherData && (
+        <DestinationWeather weatherDataJson={destination.weatherData} />
+      )}
+
       <OrderSteps />
 
       {destination.description && (

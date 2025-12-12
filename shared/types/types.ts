@@ -71,6 +71,31 @@ export interface IHub {
   };
 }
 
+// Прогноз погоды на день
+export interface IDayForecast {
+  date: string;
+  dayOfWeek: string;
+  tempMax: number;
+  tempMin: number;
+  weatherCode: number;
+  description: string;
+  icon: string;
+  precipitationProbability: number;
+}
+
+// Данные погоды для маршрута
+export interface IWeatherData {
+  from: {
+    city: string;
+    forecast: IDayForecast[];
+  };
+  to: {
+    city: string;
+    forecast: IDayForecast[];
+  };
+  updatedAt: string;
+}
+
 // Направления (маршруты внутри хаба)
 export interface IDestination {
   id: number;
@@ -88,6 +113,10 @@ export interface IDestination {
   content?: string;
   fromCity?: string;
   toCity?: string;
+  fromLat?: number;
+  fromLng?: number;
+  toLat?: number;
+  toLng?: number;
   distance?: number;
   duration?: string;
   price?: number;
@@ -97,6 +126,8 @@ export interface IDestination {
   faq?: string;
   tariffs?: string;
   targetAudience?: string;
+  weatherData?: string;
+  weatherUpdatedAt?: string;
   sortOrder: number;
   isActive: boolean;
   isFeatured: boolean;
