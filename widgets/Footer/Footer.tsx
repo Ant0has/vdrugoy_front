@@ -24,11 +24,11 @@ const Footer = () => {
   const regionData = getSelectedRegion(route)
 
   const navList = [
-    // {
-    //   id: 1,
-    //   label: 'Главная',
-    //   // route: 'contacts'
-    // },
+    {
+      id: 1,
+      label: 'Главная',
+      handleClick: () => router.push('/')
+    },
     {
       id: 2,
       label: 'Заказать такси',
@@ -39,28 +39,22 @@ const Footer = () => {
       label: 'Погода',
       isHidden: !departurePoint && !arrivalPoint,
       handleClick: () => goToBlock('weather')
-      // handleClick: () => setQuestionModalData({ status: true, blockFrom: Blocks.FOOTER })
     },
     {
       id: 4,
-      label: 'Другие маршруты',
+      label: 'Направления',
       handleClick: () => goToBlock('cities')
     },
     {
       id: 5,
-      label: 'Отзывы',
-      route: 'oferta',
-      handleClick: () => goToBlock('reviews')
-    },
-    {
-      id: 6,
       label: 'Описание маршрута',
       isHidden: !route?.content,
       handleClick: () => goToBlock('routeDescription')
     },
     {
-      id: 7,
+      id: 6,
       label: 'Контакты',
+      handleClick: () => router.push('/kontakty')
     },
     {
       id: 7,

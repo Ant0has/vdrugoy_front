@@ -19,13 +19,33 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const canonicalUrl = `https://vdrugoygorod.ru/${params.region}/${params.destination}`;
-  const title = destination.seoTitle || `${destination.title} | ${SITE_NAME}`;
-  const description = destination.seoDescription || destination.subtitle || destination.description || '';
+  const routeName = `${destination.fromCity || ''} — ${destination.toCity || ''}`;
+
+  // Формируем SEO-оптимизированные title и description с параметрами маршрута
+  const priceFormatted = destination.price
+    ? new Intl.NumberFormat('ru-RU').format(destination.price)
+    : null;
+
+  const title = destination.seoTitle ||
+    `Трансфер ${routeName}${priceFormatted ? ` от ${priceFormatted} ₽` : ''} | ${SITE_NAME}`;
+
+  const descriptionParts = [
+    `Заказать трансфер ${routeName}.`,
+    destination.distance ? `Расстояние ${destination.distance} км.` : '',
+    destination.duration ? `Время в пути ${destination.duration}.` : '',
+    priceFormatted ? `Цена от ${priceFormatted} ₽.` : '',
+    'Комфортные автомобили, опытные водители. Работаем 24/7.',
+  ].filter(Boolean).join(' ');
+
+  const description = destination.seoDescription || descriptionParts;
+
+  const keywords = destination.seoKeywords ||
+    `трансфер ${destination.fromCity}, такси ${routeName}, междугороднее такси ${destination.toCity}, заказать трансфер`;
 
   return {
     title,
     description,
-    keywords: destination.seoKeywords,
+    keywords,
     robots: "index, follow",
     alternates: { canonical: canonicalUrl },
     openGraph: {

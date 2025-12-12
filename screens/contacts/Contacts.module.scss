@@ -1,0 +1,137 @@
+.contacts {
+  padding-bottom: 60px;
+}
+
+.title {
+  font-size: 42px;
+  font-weight: 600;
+  margin-bottom: 40px;
+  color: var(--black);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 16px;
+}
+
+.phone {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--blue);
+  display: block;
+  margin-bottom: 12px;
+  transition: color 0.2s;
+
+  &:hover {
+    color: darken(#1a3a5c, 10%);
+  }
+}
+
+.email {
+  font-size: 20px;
+  color: var(--blue);
+  display: block;
+  margin-bottom: 12px;
+  transition: color 0.2s;
+
+  &:hover {
+    color: darken(#1a3a5c, 10%);
+  }
+}
+
+.description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.messengers {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.messengerBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  color: var(--black);
+  transition: background 0.2s;
+
+  &:hover {
+    background: #eee;
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.legalInfo {
+  p {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.8;
+
+    strong {
+      font-weight: 600;
+    }
+  }
+}
+
+.workTime {
+  font-size: 24px;
+  font-weight: 600;
+  color: #22c55e;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card {
+    padding: 24px;
+  }
+
+  .phone {
+    font-size: 24px;
+  }
+}
