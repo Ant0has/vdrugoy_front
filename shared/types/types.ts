@@ -83,16 +83,10 @@ export interface IDayForecast {
   precipitationProbability: number;
 }
 
-// Данные погоды для маршрута
+// Данные погоды для точки назначения
 export interface IWeatherData {
-  from: {
-    city: string;
-    forecast: IDayForecast[];
-  };
-  to: {
-    city: string;
-    forecast: IDayForecast[];
-  };
+  city: string;
+  forecast: IDayForecast[];
   updatedAt: string;
 }
 
@@ -113,8 +107,6 @@ export interface IDestination {
   content?: string;
   fromCity?: string;
   toCity?: string;
-  fromLat?: number;
-  fromLng?: number;
   toLat?: number;
   toLng?: number;
   distance?: number;
